@@ -3,6 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rick & Morty Characters</title>
+    <title>Rick & Morty - Portal Interdimensional</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
+<body>
+    <div class="home-container">
+        <!-- Header con título -->
+        <header class="home-header">
+            <div class="title-banner">
+                <h1>Rick & Morty</h1>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="home-main">
+            <div class="characters-showcase">
+                <!-- Imagen de Rick -->
+                <div class="character-section">
+                    <div class="character-image">
+                        <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick Sanchez">
+                    </div>
+                </div>
+
+                <!-- Botones centrales -->
+                <div class="navigation-buttons">
+                    <button class="nav-btn primary-btn" onclick="goToCharacters()">
+                        Personajes
+                    </button>
+                    <button class="nav-btn secondary-btn" onclick="goToSearch()">
+                        Buscar
+                    </button>
+                </div>
