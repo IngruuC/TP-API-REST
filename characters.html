@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick & Morty Characters</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation header -->
+        <nav class="navigation">
+            <button class="nav-back-btn" onclick="goHome()">
+                ← Volver al Inicio
+            </button>
+            <h1 class="page-title">Explorador de Personajes</h1>
+        </nav>
+
+        <div class="header">
+            <h1>Rick & Morty</h1>
+            <p>Explora el multiverso de personajes</p>
+        </div>
+
+        <div class="controls">
+            <div class="get-all-section">
+                <button class="btn" id="getAllBtn">Obtener Todos los Personajes</button>
+            </div>
+
+            <div class="filters" id="search">
+                <div class="filter-group">
+                    <label for="nameFilter">Nombre:</label>
+                    <input type="text" id="nameFilter" placeholder="Ej: Rick">
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter">Estado:</label>
+                    <input type="text" id="statusFilter" placeholder="alive, dead, unknown">
+                </div>
+                <div class="filter-group">
+                    <label for="speciesFilter">Especie:</label>
+                    <input type="text" id="speciesFilter" placeholder="Ej: Human">
+                </div>
+                <div class="filter-group">
+                    <label for="typeFilter">Tipo:</label>
+                    <input type="text" id="typeFilter" placeholder="Ej: Genetic experiment">
+                </div>
+                <div class="filter-group">
+                    <label for="genderFilter">Género:</label>
+                    <input type="text" id="genderFilter" placeholder="male, female, genderless, unknown">
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="btn btn-secondary" id="searchBtn">Buscar con Filtros</button>
+                <button class="btn btn-secondary" id="clearBtn">Limpiar Filtros</button>
+            </div>
+        </div>
+
+        <div class="results" id="results">
+            <div class="results-header">
+                <h2>Personajes</h2>
+                <div class="results-count" id="resultsCount">Presiona un botón para comenzar</div>
+            </div>
+            <div id="loadingMessage" class="loading" style="display: none;">Cargando personajes...</div>
+            <div id="errorMessage" class="error" style="display: none;"></div>
+            <div id="charactersContainer" class="characters-grid"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Función para volver al inicio
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Verificar si se debe hacer scroll al área de búsqueda
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#search') {
+                setTimeout(() => {
+                    document.getElementById('search').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
