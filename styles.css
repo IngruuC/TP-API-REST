@@ -239,3 +239,54 @@ body {
     border-radius: 15px;
     font-size: 0.9rem;
 }
+/* Estilos específicos para estados */
+.status-alive { 
+    background: rgba(0, 255, 0, 0.2) !important; 
+}
+
+.status-dead { 
+    background: rgba(255, 0, 0, 0.2) !important; 
+}
+
+.status-unknown { 
+    background: rgba(128, 128, 128, 0.2) !important; 
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .filters {
+        grid-template-columns: 1fr;
+    }
+    
+    .characters-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .controls {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .btn-secondary {
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+}
