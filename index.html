@@ -65,3 +65,39 @@
                         <p>Descubre personajes de todas las dimensiones y realidades alternativas</p>
                     </div>
                 </div>
+                <div class="cta-section">
+                    <button class="cta-btn" onclick="goToCharacters()">
+                        Comenzar Exploración
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="home-footer">
+            <p>&copy; 2024 Rick & Morty API Explorer | Powered by <a href="https://rickandmortyapi.com" target="_blank">Rick and Morty API</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Navegación entre páginas
+        function goToCharacters() {
+            window.location.href = 'characters.html';
+        }
+
+        function goToSearch() {
+            window.location.href = 'characters.html#search';
+        }
+
+        // Efectos de animación al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.character-image, .nav-btn, .feature-card');
+            
+            elements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+                element.classList.add('fade-in');
+            });
+        });
+    </script>
+</body>
+</html>
