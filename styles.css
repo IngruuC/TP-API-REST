@@ -83,3 +83,30 @@ body {
     text-align: center;
     margin-bottom: 30px;
 }
+/* Botones */
+.btn {
+    background: linear-gradient(45deg, #00ff00, #32cd32);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 0, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #ff6b6b, #ff4757);
+    margin-right: 10px;
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
