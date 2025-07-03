@@ -240,3 +240,73 @@
 .fade-in {
     animation: fadeIn 0.6s ease-out forwards;
 }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .title-banner h1 {
+        font-size: 2.5rem;
+    }
+    
+    .characters-showcase {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .character-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .nav-btn {
+        font-size: 1.1rem;
+        padding: 12px 25px;
+        min-width: 150px;
+    }
+    
+    .welcome-section h2 {
+        font-size: 2rem;
+    }
+    
+    .welcome-section p {
+        font-size: 1.1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 20px;
+    }
+    
+    .cta-btn {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-banner h1 {
+        font-size: 2rem;
+    }
+    
+    .character-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .home-main {
+        padding: 20px 10px;
+    }
+    
+    .navigation-buttons {
+        gap: 15px;
+    }
+    
+    .nav-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+        min-width: 120px;
+    }
+}
