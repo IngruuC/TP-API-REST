@@ -119,3 +119,90 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 168, 255, 0.4);
 }
+/* Sección de bienvenida */
+.welcome-section {
+    text-align: center;
+    max-width: 1200px;
+    width: 100%;
+    color: white;
+}
+
+.welcome-section h2 {
+    font-size: 2.5rem;
+    color: #ffff00;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-section p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Grid de características */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 255, 0, 0.2);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    color: #ffff00;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #e0e0e0;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Botón de llamada a la acción */
+.cta-section {
+    margin-top: 40px;
+}
+
+.cta-btn {
+    background: linear-gradient(45deg, #ffff00, #f0f000);
+    color: #2d5e2d;
+    border: none;
+    padding: 20px 40px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 255, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-btn:hover {
+    background: linear-gradient(45deg, #f0f000, #e0e000);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 255, 0, 0.4);
+}
