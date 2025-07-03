@@ -11,3 +11,10 @@ body {
     min-height: 100vh;
     color: #fff;
 }
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
