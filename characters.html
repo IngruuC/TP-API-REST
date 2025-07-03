@@ -60,6 +60,20 @@
                 <h2>Personajes</h2>
                 <div class="results-count" id="resultsCount">Presiona un botón para comenzar</div>
             </div>
+            
+            <!-- Controles de paginación -->
+            <div class="pagination-controls" id="paginationControls" style="display: none;">
+                <button class="pagination-btn" id="prevBtn">
+                    <span class="pagination-arrow">←</span>
+                    <span>Anterior</span>
+                </button>
+                <div class="page-info" id="pageInfo">Página 1 de 1</div>
+                <button class="pagination-btn" id="nextBtn">
+                    <span>Siguiente</span>
+                    <span class="pagination-arrow">→</span>
+                </button>
+            </div>
+            
             <div id="loadingMessage" class="loading" style="display: none;">Cargando personajes...</div>
             <div id="errorMessage" class="error" style="display: none;"></div>
             <div id="charactersContainer" class="characters-grid"></div>

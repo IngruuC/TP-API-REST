@@ -322,6 +322,89 @@ body {
     font-weight: 500;
 }
 
+/* ===== CONTROLES DE PAGINACIÓN ===== */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 255, 0, 0.05));
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+}
+
+.pagination-btn {
+    background: linear-gradient(45deg, #00ff00, #32cd32);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.pagination-btn:hover:not(.disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 0, 0.4);
+    background: linear-gradient(45deg, #32cd32, #00ff00);
+}
+
+.pagination-btn.disabled {
+    background: linear-gradient(45deg, #666, #555);
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+.pagination-btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.pagination-arrow {
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.pagination-btn:hover:not(.disabled) .pagination-arrow {
+    transform: scale(1.2);
+}
+
+#prevBtn .pagination-arrow {
+    margin-right: 5px;
+}
+
+#nextBtn .pagination-arrow {
+    margin-left: 5px;
+}
+
+.page-info {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    text-align: center;
+}
+
 /* Estados */
 .loading {
     text-align: center;
@@ -489,6 +572,18 @@ body {
         margin-right: 0;
         margin-bottom: 15px;
     }
+    
+    /* Paginación responsive */
+    .pagination-controls {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .pagination-btn {
+        min-width: 100px;
+        padding: 10px 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -535,5 +630,20 @@ body {
     
     .results {
         padding: 25px;
+    }
+    
+    /* Paginación móvil */
+    .pagination-controls {
+        padding: 15px;
+    }
+    
+    .pagination-btn {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+    
+    .page-info {
+        font-size: 1rem;
+        padding: 10px 15px;
     }
 }

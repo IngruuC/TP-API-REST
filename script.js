@@ -20,6 +20,11 @@ function goHome() {
 class RickMortyApp {
     constructor() {
         this.baseUrl = 'https://rickandmortyapi.com/api/character';
+        this.currentPage = 1;
+        this.totalPages = 1;
+        this.currentData = null;
+        this.isSearchMode = false;
+        this.currentFilters = {};
         this.initializeEventListeners();
     }
 
@@ -32,6 +37,10 @@ class RickMortyApp {
             document.getElementById('getAllBtn').addEventListener('click', () => this.getAllCharacters());
             document.getElementById('searchBtn').addEventListener('click', () => this.searchCharacters());
             document.getElementById('clearBtn').addEventListener('click', () => this.clearFilters());
+            
+            // Event listeners para paginación
+            document.getElementById('prevBtn').addEventListener('click', () => this.goToPreviousPage());
+            document.getElementById('nextBtn').addEventListener('click', () => this.goToNextPage());
             
             // Permitir búsqueda con Enter
             document.addEventListener('keypress', (e) => {
@@ -48,17 +57,27 @@ class RickMortyApp {
     /**
      * Obtiene todos los personajes de la API
      */
-    async getAllCharacters() {
+    async getAllCharacters(page = 1) {
         try {
             this.showLoading();
-            const response = await fetch(this.baseUrl);
+            this.isSearchMode = false;
+            const url = `${this.baseUrl}?page=${page}`;
+            const response = await fetch(url);
             
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status}`);
             }
             
             const data = await response.json();
-            this.displayCharacters(data.results, `Mostrando ${data.results.length} de ${data.info.count} personajes`);
+            this.currentData = data;
+            this.currentPage = page;
+            this.totalPages = data.info.pages;
+            
+            this.displayCharacters(
+                data.results, 
+                `Página ${page} de ${data.info.pages} - Mostrando ${data.results.length} de ${data.info.count} personajes`
+            );
+            this.updatePaginationControls();
             
         } catch (error) {
             this.showError(`Error al obtener personajes: ${error.message}`);
@@ -70,7 +89,7 @@ class RickMortyApp {
     /**
      * Busca personajes con filtros aplicados
      */
-    async searchCharacters() {
+    async searchCharacters(page = 1) {
         try {
             this.showLoading();
             const filters = this.getFilters();
@@ -81,7 +100,10 @@ class RickMortyApp {
                 return;
             }
             
-            const queryParams = new URLSearchParams(filters).toString();
+            this.isSearchMode = true;
+            this.currentFilters = filters;
+            
+            const queryParams = new URLSearchParams({...filters, page: page.toString()}).toString();
             const url = `${this.baseUrl}?${queryParams}`;
             
             const response = await fetch(url);
@@ -94,13 +116,88 @@ class RickMortyApp {
             }
             
             const data = await response.json();
-            this.displayCharacters(data.results, `Encontrados ${data.results.length} personajes`);
+            this.currentData = data;
+            this.currentPage = page;
+            this.totalPages = data.info.pages;
+            
+            this.displayCharacters(
+                data.results, 
+                `Página ${page} de ${data.info.pages} - Encontrados ${data.results.length} de ${data.info.count} personajes`
+            );
+            this.updatePaginationControls();
             
         } catch (error) {
             this.showError(`Error en la búsqueda: ${error.message}`);
         } finally {
             this.hideLoading();
         }
+    }
+
+    /**
+     * Va a la página anterior
+     */
+    goToPreviousPage() {
+        if (this.currentPage > 1) {
+            if (this.isSearchMode) {
+                this.searchCharacters(this.currentPage - 1);
+            } else {
+                this.getAllCharacters(this.currentPage - 1);
+            }
+        }
+    }
+
+    /**
+     * Va a la página siguiente
+     */
+    goToNextPage() {
+        if (this.currentPage < this.totalPages) {
+            if (this.isSearchMode) {
+                this.searchCharacters(this.currentPage + 1);
+            } else {
+                this.getAllCharacters(this.currentPage + 1);
+            }
+        }
+    }
+
+    /**
+     * Actualiza los controles de paginación
+     */
+    updatePaginationControls() {
+        const paginationDiv = document.getElementById('paginationControls');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageInfo = document.getElementById('pageInfo');
+        
+        // Mostrar la paginación
+        paginationDiv.style.display = 'block';
+        
+        // Actualizar información de página
+        pageInfo.textContent = `Página ${this.currentPage} de ${this.totalPages}`;
+        
+        // Habilitar/deshabilitar botones
+        prevBtn.disabled = this.currentPage === 1;
+        nextBtn.disabled = this.currentPage === this.totalPages;
+        
+        // Agregar/quitar clases CSS para el estado deshabilitado
+        if (this.currentPage === 1) {
+            prevBtn.classList.add('disabled');
+        } else {
+            prevBtn.classList.remove('disabled');
+        }
+        
+        if (this.currentPage === this.totalPages) {
+            nextBtn.classList.add('disabled');
+        } else {
+            nextBtn.classList.remove('disabled');
+        }
+    }
+
+    /**
+     * Oculta los controles de paginación
+     */
+    hidePaginationControls() {
+        const paginationDiv = document.getElementById('paginationControls');
+        paginationDiv.style.display = 'none';
     }
 
     /**
@@ -137,6 +234,13 @@ class RickMortyApp {
         
         document.getElementById('charactersContainer').innerHTML = '';
         document.getElementById('resultsCount').textContent = 'Filtros limpiados. Presiona un botón para comenzar.';
+        
+        // Resetear estado de paginación
+        this.currentPage = 1;
+        this.totalPages = 1;
+        this.isSearchMode = false;
+        this.currentFilters = {};
+        this.hidePaginationControls();
         this.hideError();
     }
 
@@ -213,6 +317,7 @@ class RickMortyApp {
         errorElement.style.display = 'block';
         document.getElementById('charactersContainer').innerHTML = '';
         document.getElementById('resultsCount').textContent = 'Error en la búsqueda';
+        this.hidePaginationControls();
     }
 
     /**
