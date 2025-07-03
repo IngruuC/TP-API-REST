@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rick & Morty Characters</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Rick & Morty - Personajes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -66,23 +66,6 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
-    <script>
-        // Función para volver al inicio
-        function goHome() {
-            window.location.href = 'index.html';
-        }
-
-        // Verificar si se debe hacer scroll al área de búsqueda
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.location.hash === '#search') {
-                setTimeout(() => {
-                    document.getElementById('search').scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                }, 100);
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

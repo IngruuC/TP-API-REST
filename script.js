@@ -1,4 +1,21 @@
-/*Script para la aplicación de Rick and Morty*/
+// ===== NAVEGACIÓN ENTRE PÁGINAS =====
+
+// Función para ir a la página de personajes
+function goToCharacters() {
+    window.location.href = 'characters.html';
+}
+
+// Función para ir a la página de búsqueda (characters.html con scroll a filtros)
+function goToSearch() {
+    window.location.href = 'characters.html#search';
+}
+
+// Función para volver al inicio
+function goHome() {
+    window.location.href = 'index.html';
+}
+
+// ===== CLASE PRINCIPAL DE LA APLICACIÓN =====
 
 class RickMortyApp {
     constructor() {
@@ -10,9 +27,22 @@ class RickMortyApp {
      * Inicializa los event listeners para los botones
      */
     initializeEventListeners() {
-        document.getElementById('getAllBtn').addEventListener('click', () => this.getAllCharacters());
-        document.getElementById('searchBtn').addEventListener('click', () => this.searchCharacters());
-        document.getElementById('clearBtn').addEventListener('click', () => this.clearFilters());
+        // Verificar si estamos en la página de personajes
+        if (document.getElementById('getAllBtn')) {
+            document.getElementById('getAllBtn').addEventListener('click', () => this.getAllCharacters());
+            document.getElementById('searchBtn').addEventListener('click', () => this.searchCharacters());
+            document.getElementById('clearBtn').addEventListener('click', () => this.clearFilters());
+            
+            // Permitir búsqueda con Enter
+            document.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const activeElement = document.activeElement;
+                    if (activeElement && activeElement.tagName === 'INPUT') {
+                        this.searchCharacters();
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -193,22 +223,26 @@ class RickMortyApp {
     }
 }
 
+// ===== INICIALIZACIÓN =====
+
 /**
  * Inicializa la aplicación cuando se carga la página
  */
 document.addEventListener('DOMContentLoaded', () => {
-    new RickMortyApp();
-});
-
-/**
- * Función adicional para manejar eventos de teclado
- * Permite hacer búsqueda al presionar Enter en cualquier campo
- */
-document.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        const activeElement = document.activeElement;
-        if (activeElement && activeElement.tagName === 'INPUT') {
-            document.getElementById('searchBtn').click();
-        }
+    // Solo inicializar la app si estamos en la página de personajes
+    if (document.getElementById('getAllBtn')) {
+        new RickMortyApp();
+    }
+    
+    // Verificar si se debe hacer scroll al área de búsqueda
+    if (window.location.hash === '#search') {
+        setTimeout(() => {
+            const searchElement = document.getElementById('search');
+            if (searchElement) {
+                searchElement.scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }
+        }, 100);
     }
 });
